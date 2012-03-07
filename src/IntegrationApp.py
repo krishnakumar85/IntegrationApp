@@ -1,5 +1,4 @@
-import sys
-import wx
+#import wx
 #import IntegrationFrame
 from IntegrationFrame import *
 #TODO: use import instead of from ... import ...
@@ -11,9 +10,14 @@ class IntegrationApp(wx.App):
         wx.App.__init__(self, False)
 
     def OnInit(self):
-        self.frame = IntegrationFrame(parent=None, id=-1,
+        self.frame = IntegrationFrame(parent=None, fid=-1,
                                       title='Integration Assist',
                                       steps=self.process_steps)
+        image = wx.Image("splash.bmp", wx.BITMAP_TYPE_BMP)
+        wx.SplashScreen(image.ConvertToBitmap(), wx.SPLASH_CENTER_ON_SCREEN |
+                        wx.SPLASH_TIMEOUT, 100,
+                        None, -1)
+        wx.Yield()
         self.frame.Show()
         self.SetTopWindow(self.frame)
         return True

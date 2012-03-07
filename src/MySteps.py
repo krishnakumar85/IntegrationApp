@@ -26,6 +26,7 @@ class Parse(ProcessStep):
 
 class Fetch(ProcessStep):
     def __init__(self, stepname, fetchname):
+        ProcessStep.__init__(self)
         self.stepname = stepname
         self.fetchname = fetchname
 
@@ -38,7 +39,7 @@ class Fetch(ProcessStep):
 
     def PostCondition(self):
         print "Production folder created"
-        return 0
+        return 1
 
     def Abort(self):
         print "Abort"
