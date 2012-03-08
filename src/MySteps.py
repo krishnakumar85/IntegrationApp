@@ -18,10 +18,11 @@ class Parse(ProcessStep):
 
     def PreCondition(self):
         print "Check if file is present"
-        return 1
+        return 0
 
     def PostCondition(self):
         print "Check if build.bat is created"
+        return 0
 
 
 class Fetch(ProcessStep):

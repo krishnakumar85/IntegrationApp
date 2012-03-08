@@ -4,6 +4,7 @@ import wx.lib.newevent
 
 class ProcessEvent:
     AskOnFailure, EVT_ASK_ON_FAILURE = wx.lib.newevent.NewEvent()
+    OnStepSuccess, EVT_STEP_SUCCESS = wx.lib.newevent.NewEvent()
 
 
 class ProcessStep(object):
@@ -35,11 +36,14 @@ class ProcessStep(object):
         print "Executed Reply!!", result
 
     def EntryPoint(self, event):
+        #TODO: Create an event as this is a GUI code.
+        self.widget.SetLabel(self.stepname)
+        
         if self.PreCondition() == 0:
-            self.widget.SetBackgroundColour('green')
             self.ExecuteStep()
 
             if self.PostCondition() != 0:
+                self.widget.SetBackgroundColour('red')
                 if self.onFailure == "ABORT":
                     self.Abort()
                 elif self.onFailure == "ASK":
@@ -51,5 +55,7 @@ class ProcessStep(object):
                     print "Continue"
             else:
                 print "SUCCESS", self.stepname
+                event = ProcessEvent.OnStepSuccess(colour="green", widget=self.widget)
+                wx.PostEvent(self.panel, event)
 
             print "Bye from EntryPoint"
