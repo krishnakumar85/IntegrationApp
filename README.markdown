@@ -4,11 +4,11 @@ Integration Application
 Quick Start
 -----------
 Create a GUI for your steps in 3 simple steps:
-1. Create custom classes inheriting ProcessStep
-2. Use PreCondition, ExecuteStep and PostCondition
-3. Prepare main
+1.  Create custom classes inheriting ProcessStep
+2.  Use PreCondition, ExecuteStep and PostCondition
+3.  Prepare main
 
-1. Create custom classes inheriting ProcessStep
+1.  Create custom classes inheriting ProcessStep
 
 For example: ## MySteps.py
 	Class StepOne(ProcessStep):
@@ -16,7 +16,7 @@ For example: ## MySteps.py
 			self.stepname = stepname # stepname is mandatory and may not be changed. Additional parameters could be added.
 			self.filename = filename
 
-2. Use PreCondition, ExecuteStep and PostCondition
+2.  Use PreCondition, ExecuteStep and PostCondition
 		def PreCondition(self):
 			print "This function is automatically executed to check the necessary requirements to execute the step
 			return 0 # On Success, return 0
@@ -32,7 +32,7 @@ For example: ## MySteps.py
 			return 0 # On Success, return 0
 			#return 1 # On Failure, return non-zero
 
-3.  Prepare main ##main.py
+3.   Prepare main ##main.py
 	from IntegrationApp import IntegrationApp
 	from MySteps import StepOne
 	
