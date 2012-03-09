@@ -14,7 +14,7 @@ class ProcessStep(object):
         #GUI widget corresponding to the step.
         self.widget = None
         self.frame = None
-        self.isCont = []
+        self.isCont = False
 
     def ExecuteStep(self):
         print >>sys.stderr, \
@@ -32,8 +32,9 @@ class ProcessStep(object):
         print >>sys.stderr, \
         "Override Abort method to execute the desired functionality"
 
-    def Reply(self, result):
+    def setResponse(self, result):
         print "Executed Reply!!", result
+        self.isCont = result
 
     def EntryPoint(self, event):
         #TODO: Create an event as this is a GUI code.
@@ -48,7 +49,7 @@ class ProcessStep(object):
                     self.Abort()
                 elif self.onFailure == "ASK":
                     print "Do you want to continue?"
-                    event = ProcessEvent.AskOnFailure(msg="Do you want to continue?", reply=self.Reply)
+                    event = ProcessEvent.AskOnFailure(msg="Do you want to continue?", reply=self.setResponse)
                     wx.PostEvent(self.panel, event)
                     print "REPLY: ", self.isCont
                 else:

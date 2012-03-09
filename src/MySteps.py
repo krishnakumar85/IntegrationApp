@@ -44,3 +44,22 @@ class Fetch(ProcessStep):
 
     def Abort(self):
         print "Abort"
+        
+class Customize(ProcessStep):
+    def __init__(self, stepname):
+        ProcessStep.__init__(self)
+        self.stepname = stepname
+
+    def ExecuteStep(self):
+        print "Customize Production"
+
+    def PreCondition(self):
+        print "files present"
+        return 0
+
+    def PostCondition(self):
+        print "Release folder customized"
+        return 1
+
+    def Abort(self):
+        print "Abort"
