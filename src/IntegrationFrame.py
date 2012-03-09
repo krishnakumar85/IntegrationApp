@@ -5,6 +5,9 @@ import Process
 class IntegrationFrame(wx.Frame):
     def __init__(self, parent, fid, title, steps):
         wx.Frame.__init__(self, parent, fid, title=title, size=wx.DefaultSize)
+        icon = wx.Icon("..\img\icon.ico", wx.BITMAP_TYPE_ICO)
+        self.SetIcon(icon)
+        
         panel = wx.Panel(self, size=(1000, 1000))
         
         self.Bind(wx.EVT_CLOSE, self.onCloseWindow)
