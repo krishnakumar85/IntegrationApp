@@ -1,15 +1,20 @@
-from MySteps import Parse, Fetch, Customize
+from MySteps import Parse, Fetch, Customize, GenerateInstaller
 from IntegrationApp import IntegrationApp
+from Process import BasicSequencer
 
 if __name__ == "__main__":
     # Adding steps
-    process_steps = []
+#==============================================================================
     parsexls = Parse("Parse", "suivi_des_livraisons.xls", "v01-00-00")
-    process_steps.append(parsexls)
     fetchdll = Fetch("Fetch", "fetch.xml")
-    process_steps.append(fetchdll)
     customize = Customize("Customize")
-    process_steps.append(customize)
-    
-    app = IntegrationApp(process_steps)
+    generate = GenerateInstaller("Installer")
+
+    sequence = BasicSequencer()
+    sequence.add(parsexls)
+    sequence.add(fetchdll)
+    sequence.add(customize)
+    sequence.add(generate)
+
+    app = IntegrationApp(sequence)
     app.MainLoop()
