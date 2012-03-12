@@ -1,4 +1,5 @@
 from Process import ProcessStep
+import time
 
 
 class Cleanup(ProcessStep):
@@ -15,6 +16,7 @@ class Parse(ProcessStep):
 
     def ExecuteStep(self):
         print "Parsing file"
+        time.sleep(2)
 
     def PreCondition(self):
         print "Check if file is present"
@@ -33,6 +35,7 @@ class Fetch(ProcessStep):
 
     def ExecuteStep(self):
         print "Fetching DLLs"
+        time.sleep(1)
 
     def PreCondition(self):
         print "files ready"
@@ -44,7 +47,8 @@ class Fetch(ProcessStep):
 
     def Abort(self):
         print "Abort"
-        
+
+
 class Customize(ProcessStep):
     def __init__(self, stepname):
         ProcessStep.__init__(self)
@@ -52,6 +56,7 @@ class Customize(ProcessStep):
 
     def ExecuteStep(self):
         print "Customize Production"
+        time.sleep(2)
 
     def PreCondition(self):
         print "files present"
@@ -59,6 +64,27 @@ class Customize(ProcessStep):
 
     def PostCondition(self):
         print "Release folder customized"
+        return 0
+
+    def Abort(self):
+        print "Abort"
+
+
+class GenerateInstaller(ProcessStep):
+    def __init__(self, stepname):
+        ProcessStep.__init__(self)
+        self.stepname = stepname
+
+    def ExecuteStep(self):
+        print "Inno Setup"
+        time.sleep(2)
+
+    def PreCondition(self):
+        print "iss files present"
+        return 0
+
+    def PostCondition(self):
+        print "exe present"
         return 1
 
     def Abort(self):
