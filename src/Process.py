@@ -79,7 +79,7 @@ class BasicSequencer(object):
     def add(self, processStep):
         self.steps.append(processStep)
 
-    def start(self):
+    def execute(self):
         for this_step in self.steps:
             this_step.widget.Disable()
             this_step.widget.SetBackgroundColour(wx.NullColour)
