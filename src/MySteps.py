@@ -43,7 +43,7 @@ class Fetch(ProcessStep):
 
     def PostCondition(self):
         print "Production folder created"
-        return 1
+        return 0
 
     def Abort(self):
         print "Abort"
