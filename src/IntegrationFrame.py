@@ -25,6 +25,9 @@ class IntegrationFrame(wx.Frame):
 
         sizer = wx.BoxSizer(wx.VERTICAL)
         self.statusbar.SetStatusText("Ready.")
+
+        self.StartWorker()
+
         # Addition of process buttons
         self.processButtons = []
         for this_step in sequencer.steps:
@@ -53,10 +56,15 @@ class IntegrationFrame(wx.Frame):
         wx.EVT_TOOL(self, ID_PLAY, self.OnPlay)
         toolbar.Realize()
 
+    def StartWorker(self):
+        import Worker
+        self.wthread = Worker.Worker()
+        self.wthread.start()
+
     def OnPlay(self, event):
         print "OnPlay Play Clicked"
-        self.sequencer.start()
-        self.statusbar.SetStatusText("Completed.")
+        self.wthread.assign_work(self.sequencer)
+        #self.statusbar.SetStatusText("Completed.")
 
     def OnStatusUpdate(self, event):
         print "OnStatusUpdate", event.status_msg
